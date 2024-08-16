@@ -1,7 +1,7 @@
 import React from "react";
 import localFont from "next/font/local";
 
-const myFont = localFont({ src: "./LEDCalculator.ttf" });
+const myFont = localFont({ src: "./fonts/LEDCalculator.ttf" });
 
 interface ScreenProps {
   input: string;
