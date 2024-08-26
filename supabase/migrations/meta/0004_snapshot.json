@@ -1,0 +1,73 @@
+{
+  "id": "3176ef0a-36d6-40ee-b00b-477bc82c19d2",
+  "prevId": "b11a4e8e-85f6-4329-a063-ed6de0b66529",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.elev_table": {
+      "name": "elev_table",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "status_enum",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "'not_checked_in'"
+        },
+        "checked_in_at": {
+          "name": "checked_in_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "group_id": {
+          "name": "group_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {
+    "public.status_enum": {
+      "name": "status_enum",
+      "schema": "public",
+      "values": [
+        "checked_in",
+        "not_checked_in"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
