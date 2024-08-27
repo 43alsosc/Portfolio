@@ -8,6 +8,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
+// Definer tabellene eller Enum i databasen
 export const statusEnum = pgEnum("status_enum", [
   "checked_in",
   "not_checked_in",
@@ -22,5 +23,6 @@ export const elevTable = pgTable("elev_table", {
   group_id: text("group_id"),
 });
 
+// Definer type for insert og Select
 export type InsertUser = typeof elevTable.$inferInsert;
 export type SelectUser = typeof elevTable.$inferSelect;

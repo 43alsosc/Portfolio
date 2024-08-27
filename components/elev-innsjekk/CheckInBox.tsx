@@ -20,8 +20,11 @@ export default function CheckInBox({
   const router = useRouter();
 
   const handleClick = async () => {
+    // Slå på eller av sjekk-in status
     const newStatus = status === "checked_in" ? "not_checked_in" : "checked_in";
+
     try {
+      // Send en POST request til serveren for å oppdatere status
       const response = await fetch("/api/updateCheckInStatus", {
         method: "POST",
         headers: {
