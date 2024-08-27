@@ -35,7 +35,7 @@ export default async function Page() {
         {/* Alerts Tab */}
         <div className="fixed right-0 top-0 h-screen w-1/4 overflow-y-auto bg-zinc-100">
           <h1 className="text-3xl text-red-600 text-center bg-white">Varsel</h1>
-          <AlertBox />
+          <AlertBox groupId={"B"} />
         </div>
       </div>
     </div>

@@ -4,9 +4,20 @@ import { db } from "@/src/db";
 import moment from "moment-timezone";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    console.log("Fetching users not checked in for 30 minutes...");
+    const { searchParams } = new URL(request.url);
+    const groupId = searchParams.get("groupId");
+
+    if (!groupId) {
+      return NextResponse.json({ error: "groupId is required" }, {
+        status: 400,
+      });
+    }
+
+    console.log(
+      `Fetching users not checked in for 30 minutes for group ${groupId}...`,
+    );
 
     const osloTimezone = "Europe/Oslo";
     const now = moment().tz(osloTimezone);
@@ -25,8 +36,9 @@ export async function GET() {
       .where(
         and(
           eq(elevTable.status, "not_checked_in"),
-          sql`${elevTable.checked_in_at} < ${thirtyMinutesAgo.format()} AND ${elevTable.checked_in_at} >= ${
-            thirtyMinutesAgo.clone().startOf("day").format()
+          eq(elevTable.group_id, groupId),
+          sql`${elevTable.checked_in_at} <= ${thirtyMinutesAgo.toISOString()} AND ${elevTable.checked_in_at} >= ${
+            thirtyMinutesAgo.clone().startOf("day").toISOString()
           }`,
         ),
       );
@@ -37,7 +49,8 @@ export async function GET() {
       return NextResponse.json(result);
     } else {
       return NextResponse.json({
-        message: "No users found who haven't checked in for 30 minutes",
+        message:
+          `No users found in group ${groupId} who haven't checked in for 30 minutes`,
       });
     }
   } catch (error) {
@@ -45,7 +58,7 @@ export async function GET() {
     return NextResponse.json(
       {
         message: "Error fetching data",
-        error: (error as Error).message,
+        error: error instanceof Error ? error.message : String(error),
       },
       { status: 500 },
     );
