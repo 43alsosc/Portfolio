@@ -39,7 +39,7 @@ export default async function Home() {
           link="/elev-innsjekk"
         />
         <SpinningText
-          text="3"
+          text="Music Player"
           textPosition={[0, 0, -0.51]}
           frontColor="#4a90e2"
           textColor="#ffffff"
@@ -47,7 +47,7 @@ export default async function Home() {
           width={200}
           height={200}
           boxSize={[3, 3]}
-          link="/"
+          link="/musicplayer"
         />
       </div>
       <p className="text-center mb-8">

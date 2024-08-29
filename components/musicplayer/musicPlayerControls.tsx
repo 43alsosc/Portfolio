@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import MusicPlayer from "./audioplayer";
 import { ArrowBigUp } from "lucide-react";
+import VideoPlayer from "./videoplayer";
 
 type ButtonComponentProps = {
   className?: string;
@@ -69,7 +70,13 @@ const InputComponent = ({
   );
 };
 
-const MusicPlayerComponent = ({ url }: { url: string }) => {
+const PlayerComponent = ({
+  url,
+  type,
+}: {
+  url: string;
+  type: "audio" | "video";
+}) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 100 }}
@@ -78,7 +85,7 @@ const MusicPlayerComponent = ({ url }: { url: string }) => {
       transition={{ duration: 0.5 }}
       className="flex justify-center w-1/3"
     >
-      <MusicPlayer url={url} />
+      {type === "audio" ? <MusicPlayer url={url} /> : <VideoPlayer url={url} />}
     </motion.div>
   );
 };
@@ -159,11 +166,15 @@ export default function MusicPlayerControls() {
       <AnimatePresence>
         {showPlayer && (
           <>
-            <MusicPlayerComponent url={url} />
+            <PlayerComponent
+              url={url}
+              type={selectedInput?.toLowerCase() as "audio" | "video"}
+            />
             <ArrowButton
               onClick={() => {
                 setShowPlayer(false);
-                setSelectedInput("audio");
+                setSelectedInput(null);
+                setInputValue("");
               }}
             />
           </>
