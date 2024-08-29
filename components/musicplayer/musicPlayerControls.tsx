@@ -128,6 +128,7 @@ export default function MusicPlayerControls() {
   return (
     <div className="relative w-screen h-screen flex flex-col items-center justify-center">
       <div className="flex gap-6 mb-8">
+        {/* Button Component */}
         <AnimatePresence>
           {!selectedInput && !showPlayer && (
             <>
@@ -145,6 +146,7 @@ export default function MusicPlayerControls() {
           )}
         </AnimatePresence>
       </div>
+      {/* Input component */}
       <AnimatePresence>
         {selectedInput && !showPlayer && (
           <>
@@ -163,6 +165,7 @@ export default function MusicPlayerControls() {
           </>
         )}
       </AnimatePresence>
+      {/* Player component */}
       <AnimatePresence>
         {showPlayer && (
           <>
