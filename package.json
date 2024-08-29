@@ -22,8 +22,10 @@
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
+    "framer-motion": "^11.3.30",
     "git": "^0.1.5",
     "lucide-react": "^0.427.0",
+    "media-chrome": "^4.1.0",
     "moment-timezone": "^0.5.45",
     "next": "^14.2.6",
     "next-themes": "^0.3.0",
@@ -32,10 +34,12 @@
     "react": "^18",
     "react-dom": "^18",
     "react-live-clock": "^6.1.23-beta",
+    "spotify-audio-element": "^0.1.10",
     "supabase": "^1.190.0",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
-    "three": "^0.167.1"
+    "three": "^0.167.1",
+    "youtube-video-element": "^1.1.6"
   },
   "devDependencies": {
     "@types/node": "^20",
