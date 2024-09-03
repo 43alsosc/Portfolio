@@ -14,12 +14,12 @@ export async function GET(request: Request) {
         { error: "groupId is required" },
         {
           status: 400,
-        }
+        },
       );
     }
 
     console.log(
-      `Fetching users not checked in for 30 minutes for group ${groupId}...`
+      `Fetching users not checked in for 30 minutes for group ${groupId}...`,
     );
 
     const osloTimezone = "Europe/Oslo";
@@ -40,12 +40,10 @@ export async function GET(request: Request) {
         and(
           eq(elevTable.status, "not_checked_in"),
           eq(elevTable.group_id, groupId),
-          sql`${
-            elevTable.checked_in_at
-          } <= ${thirtyMinutesAgo.toISOString()} AND ${
-            elevTable.checked_in_at
-          } >= ${thirtyMinutesAgo.clone().startOf("day").toISOString()}`
-        )
+          sql`${elevTable.checked_in_at} <= ${thirtyMinutesAgo.toISOString()} AND ${elevTable.checked_in_at} >= ${
+            thirtyMinutesAgo.clone().startOf("day").toISOString()
+          }`,
+        ),
       );
 
     console.log("Query result:", result);
@@ -54,7 +52,8 @@ export async function GET(request: Request) {
       return NextResponse.json(result);
     } else {
       return NextResponse.json({
-        message: `No users found in group ${groupId} who haven't checked in for 30 minutes`,
+        message:
+          `No users found in group ${groupId} who haven't checked in for 30 minutes`,
       });
     }
   } catch (error) {
@@ -64,7 +63,7 @@ export async function GET(request: Request) {
         message: "Error fetching data",
         error: error instanceof Error ? error.message : String(error),
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
